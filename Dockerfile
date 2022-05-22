@@ -8,4 +8,4 @@ RUN npm install
 # Bundle app source
 COPY . .
 EXPOSE 9000
-CMD ["node server"]
+CMD ["node", "server"]
