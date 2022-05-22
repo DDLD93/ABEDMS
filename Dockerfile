@@ -2,7 +2,6 @@ FROM node
 
 # Create app directory
 # Create app directory
-RUN 
 WORKDIR /app
 
 # Install app dependencies
