@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    hostname: rabmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=ujere
+      - RABBITMQ_DEFAULT_PASS=123456
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - "${PWD}/volume/rbmq:/var/lib/rabbitmq/mnesia/" 
+    networks:
+        - ujere_net      
+  database:
+    image: mongo:4.1.8-xenial
+    container_name: 'mongodb'
+    ports:
+        - 27017:27017
+    volumes:
+        - "${PWD}/volume/mongodb:/data/db"
+    networks:
+        - ujere_net           
+  server:
+    build: .
+    container_name: 'server'
+    depends_on:
+      - rabbitmq
+      - database
+    links:
+    - rabbitmq
+    - database  
+    ports:
+        - 8888:9000
+    networks:
+        - ujere_net  
+    command: ["./wait-for-it.sh", "rabbitmq:5672", "-t", "120", "--", "node", "server.js"]
+     
+networks:
+  ujere_net:
+    driver: bridge          
