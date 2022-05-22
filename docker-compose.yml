@@ -24,7 +24,9 @@ services:
     networks:
         - ujere_net           
   server:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: 'server'
     depends_on:
       - rabbitmq
