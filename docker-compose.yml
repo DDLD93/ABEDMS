@@ -33,7 +33,7 @@ services:
     - rabbitmq
     - database  
     ports:
-        - 8888:9000
+        - 80:9000
     networks:
         - ujere_net  
     command: ["./wait-for-it.sh", "rabbitmq:5672", "-t", "120", "--", "node", "server.js"]
