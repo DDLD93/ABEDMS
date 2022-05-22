@@ -35,7 +35,7 @@ services:
     - rabbitmq
     - database  
     ports:
-        - 9000:9000
+        - 5050:9000
     networks:
         - ujere_net  
      
