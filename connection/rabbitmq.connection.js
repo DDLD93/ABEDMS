@@ -10,7 +10,7 @@ class RabbitMQConnection {
     }
     async connect () {
         try {
-            this.connection = await amqp.connect('amqp://ujere:123456@rabbitmq:5672')
+            this.connection = await amqp.connect('amqp://ujere:123456@localhost:5672')
             this.channel = await this.connection.createChannel()
              await this.channel.assertQueue(q, { durable: true })
              console.log("Connected to rabbitMQ")
