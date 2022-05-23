@@ -22,23 +22,7 @@ services:
     volumes:
         - "${PWD}/volume/mongodb:/data/db"
     networks:
-        - ujere_net           
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: 'server'
-    depends_on:
-      - rabbitmq
-      - database
-    links:
-    - rabbitmq
-    - database  
-    ports:
-        - 5050:9000
-    networks:
-        - ujere_net  
-     
+        - ujere_net              
 networks:
   ujere_net:
     driver: bridge          
